@@ -1,0 +1,41 @@
+name: Deploy API
+on:
+  push:
+    paths:
+      - 'workspace/apis/**'
+    branches:
+      - main
+jobs:
+  Deploy_API:
+    runs-on: [self-hosted,Windows]
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Deploy to APIGateway
+      run: |
+          $fileDirectory = ".\openapi-files\api\";
+          $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+          $headers.Add("Content-Type", "text/plain")
+          foreach($file in Get-ChildItem $fileDirectory -Name)
+          {
+            $tmpfilepath= ".\worspace\apis\"+$file
+            echo $tmpfilepath
+            $body=Get-Content -Path $tmpfilepath -RAW
+            Invoke-RestMethod 'http://localhost:8080/deploy' -Method 'POST' -Headers $headers -Body $body
+          }
+  Run_Test:
+    needs: Deploy_API
+    runs-on: [self-hosted,Windows]
+    steps:
+    - name: Running Tests
+      run: |
+           cd ./apistudio
+           ./gradlew test
+    - name: Upload test report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: Junit Report
+        path: ${{github.workspace}}\apistudio\build\reports\tests\test
