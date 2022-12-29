@@ -1,0 +1,60 @@
+ [		
+		{
+			"name": "Pet_Post_Test",
+			"endpointPrefix": "http://localhost:21555/gateway/Swagger%20Petstore%20-%20OpenAPI%203.0/1.0.11",
+			"invocationDetails": {
+				"url": "/pet",
+				"payload": "{\"id\":24}",
+				"httpMethod": "POST",
+				"headers": {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				}
+			},
+			"condition": {
+				"operator": "EQUALS",
+				"statusCode": "200",
+				"actualStatusCode": "0",
+				"type": "statuscode"
+			},
+			"labels": []
+		},
+		{
+			"name": "Store_Inventory_Get_Test",
+			"endpointPrefix": "http://localhost:21555/gateway/Swagger%20Petstore%20-%20OpenAPI%203.0/1.0.11",
+			"invocationDetails": {
+				"url": "/store/inventory",
+				"httpMethod": "GET",
+				"headers": {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				}
+			},
+			"condition": {
+				"operator": "EQUALS",
+				"statusCode": "200",
+				"actualStatusCode": "0",
+				"type": "statuscode"
+			},
+			"labels": []
+		},
+		{
+			"name": "Store_Inventory_Get_Test",
+			"endpointPrefix": "http://localhost:21555/gateway/Swagger%20Petstore%20-%20OpenAPI%203.0/1.0.11",
+			"invocationDetails": {
+				"url": "/pet/findByStatus?status=pending",
+				"httpMethod": "GET",
+				"headers": {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				}
+			},
+			"condition": {
+				"operator": "EQUALS",
+				"statusCode": "200",
+				"actualStatusCode": "0",
+				"type": "statuscode"
+			},
+			"labels": []
+		}
+	]
