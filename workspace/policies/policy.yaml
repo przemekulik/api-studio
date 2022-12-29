@@ -1,0 +1,27 @@
+enforcements:
+  transports:
+    - http
+    - https
+  validateSpecification:
+    - query
+    - path
+    - requestPayload
+    - responsePaylod
+    - headers
+    - cookies
+    - responseStatusCodes
+  log:
+    client:
+       headers:
+         - request
+         - response
+       payload:
+         - request
+         - response
+    native:
+       headers:
+         - request
+         - response
+       payload:
+         - request
+         - response
