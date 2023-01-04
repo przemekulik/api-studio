@@ -15,7 +15,7 @@ jobs:
         submodules: recursive
     - name: Deploy to APIGateway
       run: |
-        for file in ../workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary \"@$file\" http://localhost:8080/deploy; done
+        for file in ../workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary @$file http://localhost:8080/deploy; done
   Run_Test:
     needs: Deploy_API
     runs-on: [self-hosted, macOS]
