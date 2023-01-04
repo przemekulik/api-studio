@@ -15,16 +15,7 @@ jobs:
         submodules: recursive
     - name: Deploy to APIGateway
       run: |
-          $fileDirectory = ".\workspace\apis\";
-          $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-          $headers.Add("Content-Type", "text/plain")
-          foreach($file in Get-ChildItem $fileDirectory -Name)
-          {
-            $tmpfilepath= ".\worspace\apis\"+$file
-            echo $tmpfilepath
-            $body=Get-Content -Path $tmpfilepath -RAW
-            Invoke-RestMethod 'http://localhost:8080/deploy' -Method 'POST' -Headers $headers -Body $body
-          }
+        for file in ../workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary \"@$file\" http://localhost:8080/deploy; done
   Run_Test:
     needs: Deploy_API
     runs-on: [self-hosted, macOS]
