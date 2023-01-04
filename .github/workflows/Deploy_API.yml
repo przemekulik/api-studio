@@ -15,8 +15,6 @@ jobs:
         submodules: recursive
     - name: Deploy to APIGateway
       run: |
-        pwd
-        for file in ./workspace/apis/*; do echo $file ; done
         for file in ./workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary @$file http://localhost:8080/deploy; done
   Run_Test:
     needs: Deploy_API
@@ -24,9 +22,7 @@ jobs:
     steps:
     - name: Running Tests
       run: |
-        pwd
         cd /Users/przemek/Code/api-studio-demo/apistudio
-        pwd
         ./gradlew test
     - name: Upload test report
       if: always()
