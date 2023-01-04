@@ -22,7 +22,7 @@ jobs:
     steps:
     - name: Running Tests
       run: |
-           cd ./apistudio
+           cd ../../api-studio-demo/apistudio
            ./gradlew test
     - name: Upload test report
       if: always()
