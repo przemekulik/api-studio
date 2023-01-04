@@ -16,16 +16,18 @@ jobs:
     - name: Deploy to APIGateway
       run: |
         pwd
-        for file in ../workspace/apis/*; do echo $file ; done
-        for file in ../workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary @$file http://localhost:8080/deploy; done
+        for file in ../../../workspace/apis/*; do echo $file ; done
+        for file in ../../../workspace/apis/*; do curl -i -X POST -H "Content-Type: text/plain" --data-binary @$file http://localhost:8080/deploy; done
   Run_Test:
     needs: Deploy_API
     runs-on: [self-hosted, macOS]
     steps:
     - name: Running Tests
       run: |
-           cd /Users/przemek/Code/api-studio-demo/apistudio
-           ./gradlew test
+        pwd
+        cd ../../../../api-studio-demo/apistudio
+        pwd
+        ./gradlew test
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v3
